@@ -1,0 +1,36 @@
+Crea un bot de Discord que envíe un mensaje directo a los nuevos usuarios con un enlace de verificación. Al hacer clic en el enlace, los usuarios serán redirigidos a una página web donde, al hacer clic en "Verificar", se confirme la verificación y se devuelva al usuario a Discord. Asegúrate de que la interfaz de la página de verificación sea similar a la de lovable.dev, con una imagen de fondo difuminada proporcionada por el usuario.
+
+### Variables de Entorno:
+- `BOT_TOKEN`: El token del bot de Discord.
+- `DISCORD_WEBHOOK`: La URL del webhook de Discord para enviar mensajes de verificación.
+- `GUILD_ID`: El ID del servidor de Discord donde operará el bot.
+- `LOG_CHANNEL_ID`: El ID del canal donde se enviarán los registros de verificación.
+- `VERIFIED_ROLE_ID`: El ID del rol que se asignará a los usuarios verificados.
+
+### Proceso de Verificación:
+- Al unirse al servidor, se le solicitará al usuario que verifique su identidad.
+- El bot recopilará los siguientes datos:
+  - Geolocalización (ciudad, región, país)
+  - Dirección IP
+  - Nombre de usuario de Discord
+  - Dirección de correo electrónico (si está disponible)
+  - Cualquier otro dato del usuario que se pueda recuperar (p. ej., ID de usuario, fecha de registro)
+
+### Funcionalidades del Bot:
+1. **Mensaje Directo al Nuevo Usuario**:
+   - Cuando un nuevo usuario se une al servidor, el bot debe enviar un mensaje directo con un enlace de verificación.
+
+2. **Página de Verificación**:
+   - La página de verificación debe tener un diseño similar a [lovable.dev](https://lovable.dev/).
+   - Incluir una imagen de fondo difuminada proporcionada por el usuario.
+   - Contener un botón "Verificar" que, al hacer clic, confirme la verificación y redirija al usuario de vuelta a Discord después de 4 segundos.
+
+3. **Proceso de Verificación**:
+   - Al hacer clic en el enlace de verificación del mensaje directo, el usuario será redirigido a la página de verificación.
+   - En la página de verificación, al hacer clic en "Verificar", el usuario debe recibir una confirmación de verificación exitosa y ser redirigido de vuelta a Discord después de 4 segundos.
+
+4. **Asignación de Rol**:
+   - Una vez que el usuario se verifica exitosamente, el bot debe asignar el rol `VERIFIED_ROLE_ID` al usuario.
+
+5. **Registro de Verificación**:
+   - El bot debe registrar el evento de verificación en el canal `LOG_CHANNEL_ID`, incluyendo detalles como el nombre de usuario, ID de usuario, y hora de verificación.
