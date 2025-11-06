@@ -25,12 +25,25 @@ export default function VerificationPage({ token }: VerificationPageProps) {
 
   const handleVerify = async () => {
     setIsVerifying(true);
-    console.log('Verificando usuario con token:', token);
-    
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsVerifying(false);
-    setIsVerified(true);
+    try {
+      const res = await fetch('/api/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token }),
+      });
+      if (!res.ok) {
+        const errText = await res.text();
+        throw new Error(errText || 'No se pudo verificar');
+      }
+      // opcionalmente usar datos devueltos
+      await new Promise(resolve => setTimeout(resolve, 500));
+      setIsVerified(true);
+    } catch (e) {
+      console.error('Error verificando:', e);
+      alert('No se pudo verificar. Vuelve a abrir el enlace del DM o contacta a un admin.');
+    } finally {
+      setIsVerifying(false);
+    }
   };
 
   return (
