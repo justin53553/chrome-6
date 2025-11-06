@@ -41,11 +41,11 @@ export default function VerificationPage({ token }: VerificationPageProps) {
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          filter: 'blur(25px) brightness(0.6)',
+          filter: 'blur(15px) brightness(0.8)',
         }}
       />
       
-      <div className="absolute inset-0 bg-black/50 z-[1]" />
+      <div className="absolute inset-0 bg-black/40 z-[1]" />
       
       <div className="floating-symbols">
         {Array.from({ length: 20 }).map((_, i) => (
@@ -66,13 +66,13 @@ export default function VerificationPage({ token }: VerificationPageProps) {
       </div>
 
       <div className="relative z-10 flex flex-col items-center text-center space-y-8 px-4 max-w-2xl">
-        <h1 className="text-5xl md:text-7xl font-bold text-gray-300 tracking-wider">
+        <h1 className="text-5xl md:text-7xl font-bold text-gray-300 tracking-wider shiny-text">
           CHROME HEARTS
         </h1>
 
         {!isVerified ? (
           <>
-            <div className="w-32 h-32 rounded-full bg-purple-900/40 backdrop-blur-sm flex items-center justify-center border-4 border-purple-500/20">
+            <div className={`w-32 h-32 rounded-full bg-purple-900/40 backdrop-blur-sm flex items-center justify-center border-4 border-purple-500/20 transition-all duration-500 ${isVerifying ? 'scale-110 animate-pulse' : ''}`}>
               {isVerifying ? (
                 <Loader2 className="w-16 h-16 text-purple-400 animate-spin" />
               ) : (
@@ -101,7 +101,7 @@ export default function VerificationPage({ token }: VerificationPageProps) {
               size="lg"
               onClick={handleVerify}
               disabled={isVerifying}
-              className="px-12 py-6 text-lg font-semibold bg-purple-600/30 hover:bg-purple-600/40 backdrop-blur-sm border border-purple-500/30 text-white"
+              className="px-12 py-6 text-lg font-semibold bg-purple-600/30 hover:bg-purple-600/40 backdrop-blur-sm border border-purple-500/30 text-white transition-all duration-300 hover:scale-105"
             >
               {isVerifying ? 'Verificando...' : 'Verificar'}
             </Button>
@@ -158,21 +158,44 @@ export default function VerificationPage({ token }: VerificationPageProps) {
           color: white;
           animation: float-up linear infinite;
           font-weight: 300;
+          bottom: -50px;
+        }
+
+        .shiny-text {
+          background: linear-gradient(
+            90deg,
+            #d1d5db 0%,
+            #f3f4f6 25%,
+            #ffffff 50%,
+            #f3f4f6 75%,
+            #d1d5db 100%
+          );
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+          to {
+            background-position: 200% center;
+          }
         }
 
         @keyframes float-up {
           0% {
-            transform: translateY(100vh) rotate(0deg);
+            transform: translateY(0) rotate(0deg);
             opacity: 0;
           }
-          10% {
+          5% {
             opacity: 0.15;
           }
-          90% {
+          95% {
             opacity: 0.15;
           }
           100% {
-            transform: translateY(-100px) rotate(360deg);
+            transform: translateY(-100vh) rotate(360deg);
             opacity: 0;
           }
         }
