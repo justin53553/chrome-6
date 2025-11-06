@@ -94,7 +94,7 @@ export default function VerificationPage({ token }: VerificationPageProps) {
               size="lg"
               onClick={handleVerify}
               disabled={isVerifying}
-              className="px-16 py-7 text-xl font-bold bg-gradient-to-r from-pink-600/40 to-pink-500/40 hover:from-pink-600/60 hover:to-pink-500/60 backdrop-blur-md border-2 border-pink-500/50 text-white transition-all duration-500 ease-out hover:scale-110 hover:shadow-[0_0_30px_rgba(236,72,153,0.5)] active:scale-95"
+              className="px-16 py-7 text-xl font-bold bg-black/80 hover:bg-black/90 backdrop-blur-md border-2 border-white/20 hover:border-white/40 text-white transition-all duration-500 ease-out hover:scale-110 hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] active:scale-95"
             >
               {isVerifying ? (
                 <span className="animate-pulse">Verificando...</span>
@@ -105,36 +105,36 @@ export default function VerificationPage({ token }: VerificationPageProps) {
           </>
         ) : (
           <>
-            <div className="w-32 h-32 rounded-full bg-pink-600/40 backdrop-blur-sm flex items-center justify-center border-4 border-pink-500/50">
-              <Check className="w-16 h-16 text-pink-400 stroke-[3]" />
+            <div className="w-40 h-40 rounded-full bg-pink-600/40 backdrop-blur-md flex items-center justify-center border-4 border-pink-500/50 animate-scale-in shadow-[0_0_50px_rgba(236,72,153,0.6)]">
+              <Check className="w-20 h-20 text-pink-400 stroke-[3] animate-check-draw" />
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-4 animate-fade-in-up">
               <h2 className="text-4xl md:text-5xl font-bold text-white tracking-wide">
                 VERIFICADO
               </h2>
-              <p className="text-gray-300 text-lg">
+              <p className="text-gray-200 text-lg">
                 Bienvenido a Chrome Hearts
               </p>
-              <p className="text-gray-500 text-xs tracking-widest uppercase">
+              <p className="text-gray-400 text-xs tracking-widest uppercase">
                 Discord Verified
               </p>
             </div>
 
-            <div className="pt-8 space-y-3">
-              <p className="text-gray-500 text-xs tracking-widest uppercase">
-                Creators
+            <div className="pt-8 space-y-4 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+              <p className="text-gray-300 text-sm tracking-widest uppercase font-semibold">
+                CREATORS
               </p>
-              <div className="flex items-center justify-center gap-6 text-gray-400 text-sm">
+              <div className="flex items-center justify-center gap-6 text-gray-300 text-base font-medium">
                 <span>ALMIRI</span>
-                <span className="text-gray-600">•</span>
+                <span className="text-gray-500">•</span>
                 <span>cookingwithLAJA</span>
-                <span className="text-gray-600">•</span>
+                <span className="text-gray-500">•</span>
                 <span>bighomie</span>
               </div>
             </div>
 
-            <p className="text-gray-500 text-sm pt-4">
+            <p className="text-gray-400 text-base pt-4 animate-pulse">
               Redirigiendo en {countdown}s...
             </p>
           </>
@@ -229,6 +229,59 @@ export default function VerificationPage({ token }: VerificationPageProps) {
 
         .animate-fade-in {
           animation: fade-in 1s ease-out;
+        }
+
+        @keyframes scale-in {
+          0% {
+            transform: scale(0);
+            opacity: 0;
+          }
+          50% {
+            transform: scale(1.1);
+          }
+          100% {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+
+        @keyframes check-draw {
+          0% {
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            opacity: 0;
+          }
+          50% {
+            opacity: 1;
+          }
+          100% {
+            stroke-dashoffset: 0;
+            opacity: 1;
+          }
+        }
+
+        @keyframes fade-in-up {
+          0% {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-scale-in {
+          animation: scale-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        .animate-check-draw {
+          animation: check-draw 0.8s cubic-bezier(0.65, 0, 0.35, 1) 0.3s forwards;
+        }
+
+        .animate-fade-in-up {
+          animation: fade-in-up 0.8s ease-out forwards;
+          opacity: 0;
         }
       `}</style>
     </div>
